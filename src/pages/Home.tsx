@@ -1,8 +1,8 @@
+import Header from "../components/Header/Header";
+
 function Home() {
   return (
-    <div>
-      11111
-    </div>
+    <Header></Header>
   )
 };
 

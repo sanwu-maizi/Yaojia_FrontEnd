@@ -1,10 +1,21 @@
-import { memo } from "react";
+import { memo, useEffect, useState } from "react";
 import BasicTable from "../BasicTable";
 import { getMedicineList } from "../../api";
+import { Medicine } from "../../types";
 
 function MedicinesTable() {
   // TODO 确认传递参数
-  const dataSource = getMedicineList();
+  const [data, setData] = useState<Medicine[]>([]);
+
+  useEffect(()=> {
+    getMedicines();
+  }, []);
+  
+  const getMedicines= async () => {
+    const res = await getMedicineList();
+    setData(res);
+  };
+
   // TODO 确认列名
   const columns = [
     {
@@ -18,9 +29,9 @@ function MedicinesTable() {
       key: "name",
     },
     {
-      title: "",
-      dataIndex: "",
-      key: "",
+      title: "药品数目",
+      dataIndex: "count",
+      key: "count",
     },
     {
       title: "",
@@ -45,7 +56,7 @@ function MedicinesTable() {
   ];
   return (
     <>
-      <BasicTable dataSource={dataSource} columns={columns}></BasicTable>
+      <BasicTable dataSource={data} columns={columns}></BasicTable>
     </>
   );
 }

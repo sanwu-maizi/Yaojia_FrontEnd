@@ -1,45 +1,40 @@
-import React, { startTransition } from 'react';
-import './index.css';
-import { UserOutlined, GithubOutlined, MailOutlined, BellOutlined, SearchOutlined } from '@ant-design/icons';
-import { Avatar, Space, Popover, Button, Input } from 'antd';
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import "./index.css";
+import { UserOutlined, GithubOutlined, MailOutlined, BellOutlined, SearchOutlined } from "@ant-design/icons";
+import { Avatar, Space, Popover, Button, Input } from "antd";
+import { useNavigate } from "react-router-dom";
+import { GITHUB_WEBSITE, QQ_EMAIL } from "../../constants";
+import { jumpToPage } from "../../utils";
 
 const Header: React.FC = () => {
   const navigate = useNavigate();
 
   const toGithub = () => {
-    window.location.href = 'https://github.com/sanwu-maizi/Yaojia_FrontEnd';
+    jumpToPage(GITHUB_WEBSITE);
   };
 
   const emailUs = () => {
-    window.location.href = 'mailto:1417900122@qq.com';
+    jumpToPage(QQ_EMAIL);
   };
 
   const toProfile = () => {
-    startTransition(() => {
-
-    navigate('/profile');
-    });
+    // TODO 增加profile路由及页面，可以参照其他页面
+    navigate("/profile");
   };
 
   const toSettings = () => {
-    startTransition(() => {
-      navigate('/setting');
-    });
+    // TODO
+      navigate("/setting");
   };
 
   const logout = () => {
-    startTransition(() => {
-      // 执行登出逻辑
-      navigate('/logout');
-    });
+      // TODO
+      navigate("/");
   };
 
   const login = () => {
-   startTransition(() => {
-      // 执行登录逻辑
-      navigate('/login');
-    });
+      // TODO
+      navigate("/login");
   };
 
   const popoverContent = (
@@ -66,6 +61,6 @@ const Header: React.FC = () => {
       </Space>
     </header>
   );
-}
+};
 
 export default Header;

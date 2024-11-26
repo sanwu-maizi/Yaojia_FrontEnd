@@ -1,6 +1,7 @@
 import { useState } from "react";
-import "./Login.css"; // 引入CSS样式文件
+import "./Login.css";
 import { FacebookOutlined, GithubOutlined, GoogleOutlined } from "@ant-design/icons";
+import { login } from "../api";
 
 const LoginPage = () => {
   const [status, setStatus] = useState(0); // 0: 默认登录状态, 1: 注册状态
@@ -13,7 +14,14 @@ const LoginPage = () => {
     const user = userData.find(
       (user) => user.username === username && user.password === password
     );
+    // TODO 登录注册逻辑完善，删除alert
+    try {
+      const res = login();
+    } catch {
+      throw new Error("登录失败");
+    }
     if (user) {
+
       alert("登录成功！");
     } else {
       alert("用户名或密码错误！");

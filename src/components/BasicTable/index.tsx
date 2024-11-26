@@ -1,12 +1,12 @@
 import { Table } from "antd";
 import { memo } from "react";
 
-type Props = {
-  dataSource: Record<string, any>[];
+type Props<T> = {
+  dataSource: T[];
   columns: Record<string, string>[];
 }
 
-function BasicTable({dataSource, columns}: Props) {
+function BasicTable<T>({dataSource, columns}: Props<T>) {
   return (
     <>
       <Table dataSource={dataSource} columns={columns} />;

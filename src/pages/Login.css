@@ -100,32 +100,6 @@ img {
   color: #000;
 }
 
-/* 登录方式 Logo 区域 */
-.login-logo {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin: 20px;
-}
-
-.login-logo > div {
-  margin: 10px;
-  width: 40px;
-  height: 40px;
-  background-color: #ffffff;
-  border-radius: 50%;
-  border: 1px solid #e3e4e7;
-  box-sizing: border-box;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.login-logo svg {
-  width: 20px;
-  height: 20px;
-}
 
 /* 已有账号切换区域 */
 .login-account {
@@ -160,5 +134,39 @@ img {
 }
 
 .login-last:hover {
+  color: #000;
+}
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.login-btn {
+  margin-top: 10px;
+}
+
+.login-logo {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.login-logo-item {
+  cursor: pointer;
+}
+
+.icon {
+  font-size: 32px;
   color: #000;
 }

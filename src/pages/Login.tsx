@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./Login.css"; // 引入CSS样式文件
+import { FacebookOutlined, GithubOutlined, GoogleOutlined } from "@ant-design/icons";
 
 const LoginPage = () => {
   const [status, setStatus] = useState(0); // 0: 默认登录状态, 1: 注册状态
@@ -33,7 +34,6 @@ const LoginPage = () => {
   return (
     <div className="background">
       <div className="login">
-        {/* 力扣 Logo */}
         <div className="login-yaojia">
           <img
             src="https://obs-yaojia.obs.cn-north-4.myhuaweicloud.com/img/%E8%8D%AF%E7%93%B6.png"
@@ -92,40 +92,16 @@ const LoginPage = () => {
 
         {/* 登录方式 Logo */}
         <div className="login-logo">
-          <div className="login-logo-QQ">
-            <svg className="icon1" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
-              {/* QQ Logo Path */}
-              <path
-                d="M933.446 643.862c-18.784-108.945-97.673-180.323-97.673-180.323 11.268-98.92..."
-                fill="#1296db"
-              ></path>
-            </svg>
-          </div>
-          <div className="login-logo-github">
-            <svg className="icon2" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
-              {/* GitHub Logo Path */}
-              <path
-                d="M512 12.64c-282.752 0-512 229.216-512 512 0 226.208 146.72 418.144..."
-                fill="#2c2c2c"
-              ></path>
-            </svg>
-          </div>
-          <div className="login-logo-weibo">
-            <svg className="icon3" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
-              {/* 微博 Logo Path */}
-              <path
-                d="M851.4 590.193c-22.196-66.233-90.385-90.422-105.912-91.863-15.523..."
-                fill="#E71F19"
-              ></path>
-            </svg>
-          </div>
-          <div className="login-logo-weixin">
-            <svg className="icon4" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
-              {/* 微信 Logo Path */}
-              <path d="M1024 624.6c0-149.9-142.3-271.8-317.2-271.8s-317.2 122-317.2 271.8..." />
-            </svg>
-          </div>
+        <div className="login-logo-item">
+          <GithubOutlined className="icon" />
         </div>
+        <div className="login-logo-item">
+          <GoogleOutlined className="icon" />
+        </div>
+        <div className="login-logo-item">
+          <FacebookOutlined className="icon" />
+        </div>
+      </div>
 
         {/* 账号切换和协议 */}
         <div className="login-account">

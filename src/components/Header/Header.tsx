@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { startTransition } from 'react';
 import './index.css';
 import { UserOutlined, GithubOutlined, MailOutlined, BellOutlined, SearchOutlined } from '@ant-design/icons';
 import { Avatar, Space, Popover, Button, Input } from 'antd';
@@ -16,19 +16,30 @@ const Header: React.FC = () => {
   };
 
   const toProfile = () => {
+    startTransition(() => {
+
     navigate('/profile');
+    });
   };
 
   const toSettings = () => {
-    navigate('/settings');
+    startTransition(() => {
+      navigate('/setting');
+    });
   };
 
   const logout = () => {
-    // 执行登出逻辑，例如清除用户会话
-    navigate('/login');
-  };const login = () => {
-    // 执行登出逻辑，例如清除用户会话
-    navigate('/Login');
+    startTransition(() => {
+      // 执行登出逻辑
+      navigate('/logout');
+    });
+  };
+
+  const login = () => {
+   startTransition(() => {
+      // 执行登录逻辑
+      navigate('/login');
+    });
   };
 
   const popoverContent = (

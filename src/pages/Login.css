@@ -29,13 +29,20 @@ img {
 }
 
 /* 力扣 LOGO */
-.login-leetcode {
+.login-yaojia {
   box-sizing: border-box;
   margin-top: 20px;
-  width: 100%;
+  width: 80%;
   text-align: center;
   margin-bottom: 20px;
 }
+
+.login-yaojia img {
+  width: 120px; /* 设置图片宽度 */
+  height: 80px; /* 设置图片高度 */
+  object-fit: contain; /* 保证图片内容按比例缩放 */
+}
+
 
 /* 输入框区域 */
 .login-tel {

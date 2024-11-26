@@ -2,31 +2,30 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1vh;
-  background-color: #1572cfdc;
+  padding: 10px 20px;
+  background-color: #b8d6f4dc;
   border-bottom: 1px solid #e0e0e0;
-  height: 5vh;
 }
 
-.nav {
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.search-input {
+  width: 500px;
+  height: px;
+}
+
+.user-actions {
   display: flex;
-  justify-content: space-around; /* 或者使用 space-between */
-  flex-grow: 1;
-  margin-left: 80%; /* 推开按钮，使其占据右边的 70% */
+  align-items: center;
+  gap: 10px; /* 添加间距 */
 }
 
 .linkButton {
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.linkButton:hover {
-  background-color: #0056b3;
+  margin-right: 10px;
+  color: #000;
 }
 
 .user-avatar img {

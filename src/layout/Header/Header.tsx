@@ -1,28 +1,71 @@
-import React from "react";
-import "./index.css";
+import React, { startTransition } from 'react';
+import './index.css';
+import { UserOutlined, GithubOutlined, MailOutlined, BellOutlined, SearchOutlined } from '@ant-design/icons';
+import { Avatar, Space, Popover, Button, Input } from 'antd';
+import { useNavigate } from 'react-router-dom';
 
-import { UserOutlined,GithubOutlined,MailOutlined } from "@ant-design/icons";
-import { Avatar  ,Space} from "antd";
 const Header: React.FC = () => {
+  const navigate = useNavigate();
+
+  const toGithub = () => {
+    window.location.href = 'https://github.com/sanwu-maizi/Yaojia_FrontEnd';
+  };
+
+  const emailUs = () => {
+    window.location.href = 'mailto:1417900122@qq.com';
+  };
+
+  const toProfile = () => {
+    startTransition(() => {
+
+    navigate('/profile');
+    });
+  };
+
+  const toSettings = () => {
+    startTransition(() => {
+      navigate('/setting');
+    });
+  };
+
+  const logout = () => {
+    startTransition(() => {
+      // 执行登出逻辑
+      navigate('/logout');
+    });
+  };
+
+  const login = () => {
+   startTransition(() => {
+      // 执行登录逻辑
+      navigate('/login');
+    });
+  };
+
+  const popoverContent = (
+    <div>
+      <p>用户名: 用户名</p>
+      <Button type="link" onClick={toProfile}>查看个人资料</Button>
+      <Button type="link" onClick={toSettings}>设置</Button>
+      <Button type="link" onClick={logout}>登出</Button>
+      <Button type="link" onClick={login}>登录</Button>
+    </div>
+  );
+
   return (
     <header className="header">
-      <nav className="nav">
-        
-        <GithubOutlined onClick={toGithub}/>
-        <MailOutlined width={"100px"} />
-        <GithubOutlined onClick={toGithub}/>
-        <MailOutlined width={"100px"} />
-      </nav>
-      <Space direction="vertical" size={16}>
-        <Avatar size={36} icon={<UserOutlined />} />
+      <div className="logo">Yaojia</div>
+      <Input className="search-input" placeholder="搜索" prefix={<SearchOutlined />} />
+      <Space direction="horizontal" size={16} className="user-actions">
+        <Button type="link" icon={<GithubOutlined />} onClick={toGithub}>GitHub</Button>
+        <Button type="link" icon={<MailOutlined />} onClick={emailUs}>联系我们</Button>
+        <Button type="link" icon={<BellOutlined />} >通知</Button>
+        <Popover content={popoverContent} title="用户信息" trigger="hover">
+          <Avatar size={36} icon={<UserOutlined />} />
+        </Popover>
       </Space>
     </header>
   );
-};
-
-function toGithub(){
-  window.location.href = "https://github.com";
 }
-
 
 export default Header;

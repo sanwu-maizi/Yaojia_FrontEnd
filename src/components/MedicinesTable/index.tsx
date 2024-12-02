@@ -34,24 +34,19 @@ function MedicinesTable() {
       key: "count",
     },
     {
-      title: "",
-      dataIndex: "",
-      key: "",
+      title: "药品功能",
+      dataIndex: "medicinefunction",
+      key: "medicineFunction",
     },
     {
-      title: "",
-      dataIndex: "",
-      key: "",
+      title: "价格",
+      dataIndex: "price",
+      key: "price",
     },
     {
-      title: "",
-      dataIndex: "",
-      key: "",
-    },
-    {
-      title: "",
-      dataIndex: "",
-      key: "",
+      title: "药品部",
+      dataIndex: "department",
+      key: "department",
     },
   ];
   return (

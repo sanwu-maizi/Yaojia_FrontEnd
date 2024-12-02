@@ -1,10 +1,21 @@
-import { memo } from "react";
+import { memo, useEffect, useState } from "react";
 import { getOrderList } from "../../api";
 import BasicTable from "../BasicTable";
+import { Order } from "../../types";
 
 function OrdersTable() {
   // TODO
-  const dataSource = getOrderList();
+
+  const [data, setData] = useState<Order[]>([]);
+
+  useEffect(()=> {
+    getOrders();
+  }, []);
+  
+  const getOrders= async () => {
+    const res = await getOrderList();
+    setData(res);
+  };
   // TODO
   const columns = [
     {
@@ -13,39 +24,29 @@ function OrdersTable() {
       key: "id",
     },
     {
-      title: "",
-      dataIndex: "",
-      key: "",
+      title: "病人名",
+      dataIndex: "userName",
+      key: "userName",
     },
     {
-      title: "",
-      dataIndex: "",
-      key: "",
+      title: "药品列表",
+      dataIndex: "medicineList",
+      key: "medicineList",
     },
     {
-      title: "",
-      dataIndex: "",
-      key: "",
+      title: "订单状态",
+      dataIndex: "status",
+      key: "status",
     },
     {
-      title: "",
-      dataIndex: "",
-      key: "",
-    },
-    {
-      title: "",
-      dataIndex: "",
-      key: "",
-    },
-    {
-      title: "",
-      dataIndex: "",
-      key: "",
+      title: "病情信息",
+      dataIndex: "diseaseInfo",
+      key: "diseaseInfo",
     },
   ];
   return (
     <>
-      <BasicTable dataSource={dataSource} columns={columns}></BasicTable>
+      <BasicTable dataSource={data} columns={columns}></BasicTable>
     </>
   );
 }

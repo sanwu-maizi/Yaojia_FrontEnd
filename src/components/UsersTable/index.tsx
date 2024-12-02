@@ -1,10 +1,20 @@
-import { memo } from "react";
+import { memo, useEffect, useState } from "react";
 import BasicTable from "../BasicTable";
 import { getUserList } from "../../api";
+import { User } from "../../types";
 
 function UsersTable() {
   // TODO
-  const dataSource = getUserList();
+  const [data, setData] = useState<User[]>([]);
+
+  useEffect(()=> {
+    getUsers();
+  }, []);
+  
+  const getUsers= async () => {
+    const res = await getUserList() ;
+    setData(res);
+  };
   // TODO
   const columns = [
     {
@@ -18,34 +28,29 @@ function UsersTable() {
       key: "name",
     },
     {
-      title: "",
-      dataIndex: "",
-      key: "",
+      title: "用户邮箱",
+      dataIndex: "email",
+      key: "email",
     },
     {
-      title: "",
-      dataIndex: "",
-      key: "",
+      title: "用户状态",
+      dataIndex: "status",
+      key: "status",
     },
     {
-      title: "",
-      dataIndex: "",
-      key: "",
+      title: "权限",
+      dataIndex: "permission",
+      key: "permission",
     },
     {
-      title: "",
-      dataIndex: "",
-      key: "",
-    },
-    {
-      title: "",
-      dataIndex: "",
-      key: "",
+      title: "用户创建时间",
+      dataIndex: "createTime",
+      key: "createTime",
     },
   ];
   return (
     <>
-      <BasicTable dataSource={dataSource} columns={columns}></BasicTable>
+      <BasicTable dataSource={data} columns={columns}></BasicTable>
     </>
   );
 }

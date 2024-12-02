@@ -28,7 +28,7 @@ export default [
       "no-alert": "error",
       "no-console": "error",
       "semi": ["error", "always"],
-      "quotes": ["error", "double"],
+      "quotes": ["error", "double", "avoid-escape", "backtick"],
       "@typescript-eslint/no-explicit-any": "off",
     },
   },

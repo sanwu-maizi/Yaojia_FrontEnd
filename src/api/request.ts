@@ -15,14 +15,14 @@ service.interceptors.request.use(
   }
 );
  
-service.interceptors.response.use(
-  (response) => {
-    const res = response.data;
-    return res;
-  },
-  error => {
-    return Promise.reject(error);
-  }
-);
+// service.interceptors.response.use(
+//   (response) => {
+//     const res = response.data;
+//     return res;
+//   },
+//   error => {
+//     return Promise.reject(error);
+//   }
+// );
  
 export default service;

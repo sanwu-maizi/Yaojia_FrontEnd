@@ -14,18 +14,18 @@ export function getUserList(params: FetchUsersParams){
   if (IS_MOCK) {
     return Promise.resolve(MOCK_USER_LIST);
   }
-  return service.get("/getUserList", { params: params });
+  return service.get("/getUserList?size=${params?.size}&offset=${params?.offset}&token=${params?.token}");
 }
  
 export function getOrderList(params: FetchOrdersParams) {
   if (IS_MOCK) {
     return Promise.resolve(MOCK_ORDER_LIST);
   }
-  return service.get("/getOrderList", { params: params });
+  return service.get("/getOrderList?size=${params?.size}&offset=${params?.offset}&token=${params?.token}",);
 }
 
 export function getVerificationCode(params: FetchCode) {
-  return service.get("/user/code", { params: params });
+  return service.get(`/user/code?user_email=${params.user_email}`);
 }
 
 

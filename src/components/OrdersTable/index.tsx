@@ -2,21 +2,37 @@ import { memo, useEffect, useState } from "react";
 import { getOrderList } from "../../api";
 import BasicTable from "../BasicTable";
 import { Order } from "../../types";
+import { getToken } from "../../utils/store";
+import { message } from "antd";
 
 function OrdersTable() {
-  // TODO
-
   const [data, setData] = useState<Order[]>([]);
+  const [messageApi, contextHolder] = message.useMessage();
 
   useEffect(()=> {
     getOrders();
   }, []);
-  
-  const getOrders= async () => {
-    const res = await getOrderList();
-    setData(res);
+
+  const getOrders = async () => {
+    try {
+      const { data } = await getOrderList({
+        size: 10,
+        offset: 0,
+        token: getToken() || "",
+       });
+      const { code, message } = data.res;
+      if (code === 200) {
+        setData(data.res.data.orderList)
+      } else {
+        messageApi.error(message);
+        throw new Error("Error: " + message);
+      }
+    } catch {
+      messageApi.error("获取异常");
+      throw new Error("获取异常");
+    }
   };
-  // TODO
+  
   const columns = [
     {
       title: "订单ID",
@@ -46,6 +62,7 @@ function OrdersTable() {
   ];
   return (
     <>
+      { contextHolder }
       <BasicTable dataSource={data} columns={columns}></BasicTable>
     </>
   );

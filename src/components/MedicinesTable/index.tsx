@@ -2,21 +2,37 @@ import { memo, useEffect, useState } from "react";
 import BasicTable from "../BasicTable";
 import { getMedicineList } from "../../api";
 import { Medicine } from "../../types";
+import { getToken } from "../../utils/store";
+import { message } from "antd";
 
 function MedicinesTable() {
-  // TODO 确认传递参数
   const [data, setData] = useState<Medicine[]>([]);
+  const [messageApi, contextHolder] = message.useMessage();
 
   useEffect(()=> {
     getMedicines();
   }, []);
-  
-  const getMedicines= async () => {
-    const res = await getMedicineList();
-    setData(res);
+
+  const getMedicines = async () => {
+    try {
+      const { data } = await getMedicineList({
+        size: 10,
+        offset: 0,
+        token: getToken() || "",
+       });
+      const { code, message } = data.res;
+      if (code === 200) {
+        setData(data.res.data.medicineList)
+      } else {
+        messageApi.error(message);
+        throw new Error("Error: " + message);
+      }
+    } catch {
+      messageApi.error("获取异常");
+      throw new Error("获取异常");
+    }
   };
 
-  // TODO 确认列名
   const columns = [
     {
       title: "药品ID",
@@ -51,6 +67,7 @@ function MedicinesTable() {
   ];
   return (
     <>
+      { contextHolder }
       <BasicTable dataSource={data} columns={columns}></BasicTable>
     </>
   );

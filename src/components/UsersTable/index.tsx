@@ -2,20 +2,37 @@ import { memo, useEffect, useState } from "react";
 import BasicTable from "../BasicTable";
 import { getUserList } from "../../api";
 import { User } from "../../types";
+import { getToken } from "../../utils/store";
+import { message } from "antd";
 
 function UsersTable() {
-  // TODO
+  const [messageApi, contextHolder] = message.useMessage();
   const [data, setData] = useState<User[]>([]);
 
   useEffect(()=> {
     getUsers();
   }, []);
-  
-  const getUsers= async () => {
-    const res = await getUserList() ;
-    setData(res);
+
+  const getUsers = async () => {
+    try {
+      const { data } = await getUserList({
+        size: 10,
+        offset: 0,
+        token: getToken() || "",
+       });
+      const { code, message } = data.res;
+      if (code === 200) {
+        setData(data.res.data.userList)
+      } else {
+        messageApi.error(message);
+        throw new Error("Error: " + message);
+      }
+    } catch {
+      messageApi.error("获取异常");
+      throw new Error("获取异常");
+    }
   };
-  // TODO
+  
   const columns = [
     {
       title: "用户ID",
@@ -50,6 +67,7 @@ function UsersTable() {
   ];
   return (
     <>
+      { contextHolder }
       <BasicTable dataSource={data} columns={columns}></BasicTable>
     </>
   );

@@ -16,16 +16,9 @@ service.interceptors.request.use(
 );
  
 service.interceptors.response.use(
-  response => {
+  (response) => {
     const res = response.data;
-    if (res.code === 200) {
-      return res.data;
-    } else {
-      return Promise.reject({
-        message: res.message || "Error",
-        status: res.code
-      });
-    }
+    return res;
   },
   error => {
     return Promise.reject(error);

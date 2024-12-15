@@ -26,20 +26,20 @@ const LoginPage = () => {
 
   const handleLogin = async () => {
     try {
+      console.log(email, password)
       const { data } = await login({
-        user_email: email,
-        user_password: password
+        userEmail: email,
+        userPassword: password
        });
-      const { code, message } = data.res;
-      if (code === 200) {
-        handleSuccess(data.res.data)
+       console.log(data)
+      const { code, message } = data;
+      if (code === 200  || Number(code) === 200) {
+        handleSuccess(data.data)
       } else {
-        messageApi.error(message);
         throw new Error("Error: " + message);
       }
     } catch {
       messageApi.error("登录异常");
-      throw new Error("登录异常");
     }
   };
 
@@ -47,21 +47,19 @@ const LoginPage = () => {
   const handleRegister = async () => {
     try {
       const { data } = await register({
-        user_email: email,
-        user_password: password,
+        userEmail: email,
+        userPassword: password,
         code: code,
-        user_name: username
+        userName: username
        });
-       const { message } = data.res;
-       if (data.res.code === 200) {
-        handleSuccess(data.res.data)
+       const { message, } = data;
+       if (data.code === 200 || Number(data.code) === 200) {
+        handleSuccess(data.data)
        } else {
-         messageApi.error(message);
          throw new Error("Error: " + message);
        }
     } catch {
-      messageApi.error("登录异常");
-      throw new Error("登录异常");
+      messageApi.error("注册异常");
     }
   };
 
@@ -76,10 +74,9 @@ const LoginPage = () => {
     }
     try {
       const { data } = await getVerificationCode({
-        user_email: email
+        userEmail: email
       });
     } catch {
-      messageApi.error("验证码发送异常");
       throw new Error("验证码发生异常");
     }
   }
@@ -125,7 +122,7 @@ const LoginPage = () => {
                 <Input
                   className="login-input"
                   type="password"
-                  placeholder="设置"
+                  placeholder="设置邮箱"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
@@ -135,13 +132,6 @@ const LoginPage = () => {
                   placeholder="设置密码"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                />
-                <Input
-                  className="login-input"
-                  type="password"
-                  placeholder="输入验证码"
-                  value={code}
-                  onChange={(e) => setCode(e.target.value)}
                 />
               </>
             )}

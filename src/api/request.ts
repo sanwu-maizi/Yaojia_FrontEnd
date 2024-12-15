@@ -8,7 +8,10 @@ const service = axios.create({
  
 service.interceptors.request.use(
   config => {
-    return config;
+    return {
+      ...config,
+      withCredentials: true,
+    };
   },
   error => {
     Promise.reject(error);

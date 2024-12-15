@@ -38,7 +38,7 @@ export interface FetchUsersParams {
 }
 
 export interface FetchCode {
-  user_email: string;
+  userEmail: string;
 }
 
 export interface FetchOrdersParams {
@@ -54,30 +54,28 @@ export interface FetchMedicinesParams {
 }
 
 export interface FetchLoginParams {
-  user_email: string;
-  user_password: string;
+  userEmail: string;
+  userPassword: string;
 }
 
 export interface FetchRegisterParams {
-  user_email: string;
-  user_password: string;
-  user_name: string;
+  userEmail: string;
+  userPassword: string;
+  userName: string;
   code: string;
 }
 
 export interface BasicalResponse<T> {
-  res: {
-    code: number;
-    message: string;
-    data: T
-  }
+  code: number;
+  message: string;
+  data: T
 }
 
 export interface LoginResponse {
   data: {
     token: string;
-    user_name: string;
-    user_email: string;
+    userName: string;
+    userEmail: string;
     permission: Role;
   }
 }
@@ -90,8 +88,8 @@ export interface RegisterResponse {
     message: string;
     data: {
       token: string;
-      user_name: string;
-      user_email: string;
+      userName: string;
+      userEmail: string;
       permission: Role;
     }
   }

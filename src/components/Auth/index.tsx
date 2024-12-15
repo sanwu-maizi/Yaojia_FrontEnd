@@ -6,8 +6,7 @@ interface Props {
 }
 export const AuthGuard = ({ children }: Props) => {
   const store = getStore();
-  // TODO
-  const isAuthenticated = store.token !== "";
+  const isAuthenticated = store.token !== null;
 
   if (!isAuthenticated) {
     return <Navigate to="/login" replace />;

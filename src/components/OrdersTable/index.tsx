@@ -17,26 +17,24 @@ function OrdersTable() {
     try {
       const { data } = await getOrderList({
         size: 10,
-        offset: 0,
+        offset: 1,
         token: getToken() || "",
        });
-      const { code, message } = data.res;
-      if (code === 200) {
-        setData(data.res.data.orderList)
+      const { code, message } = data;
+      if (code === 200 || Number(code) === 200) {
+        setData(data.data.orders)
       } else {
-        messageApi.error(message);
-        throw new Error("Error: " + message);
+        throw new Error("获取异常");
       }
     } catch {
       messageApi.error("获取异常");
-      throw new Error("获取异常");
     }
   };
   
   const columns = [
     {
       title: "订单ID",
-      dataIndex: "id",
+      dataIndex: "orderId",
       key: "id",
     },
     {

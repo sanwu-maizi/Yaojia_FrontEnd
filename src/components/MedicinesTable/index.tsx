@@ -17,31 +17,29 @@ function MedicinesTable() {
     try {
       const { data } = await getMedicineList({
         size: 10,
-        offset: 0,
+        offset: 1,
         token: getToken() || "",
        });
-      const { code, message } = data.res;
-      if (code === 200) {
-        setData(data.res.data.medicineList)
+      const { code, message } = data;
+      if (code === 200 || Number(code) === 200) {
+        setData(data.data)
       } else {
-        messageApi.error(message);
         throw new Error("Error: " + message);
       }
     } catch {
-      messageApi.error("获取异常");
-      throw new Error("获取异常");
+      messageApi.error("Error: " + message);
     }
   };
 
   const columns = [
     {
       title: "药品ID",
-      dataIndex: "id",
+      dataIndex: "medicineId",
       key: "id",
     },
     {
       title: "药品名",
-      dataIndex: "name",
+      dataIndex: "medicineName",
       key: "name",
     },
     {
@@ -51,12 +49,12 @@ function MedicinesTable() {
     },
     {
       title: "药品功能",
-      dataIndex: "medicinefunction",
+      dataIndex: "medicineFunction",
       key: "medicineFunction",
     },
     {
       title: "价格",
-      dataIndex: "price",
+      dataIndex: "medicinePrice",
       key: "price",
     },
     {

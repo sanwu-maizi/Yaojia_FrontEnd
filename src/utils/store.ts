@@ -40,9 +40,9 @@ export const getStore = () => {
   }
 }
 
-export const setUserStore = (user: { user_name: string; user_email: string; permission: string; token: string }) => {
-  setUserName(user.user_name);
-  setUserEmail(user.user_email);
+export const setUserStore = (user: { userName: string; userEmail: string; permission: string; token: string }) => {
+  setUserName(user.userName);
+  setUserEmail(user.userEmail);
   setUserPermission(user.permission);
   setToken(user.token)
 };

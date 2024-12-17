@@ -31,7 +31,6 @@ const LoginPage = () => {
         userEmail: email,
         userPassword: password
        });
-       console.log(data)
       const { code, message } = data;
       if (code === 200  || Number(code) === 200) {
         handleSuccess(data.data)
@@ -49,10 +48,9 @@ const LoginPage = () => {
       const { data } = await register({
         userEmail: email,
         userPassword: password,
-        code: code,
         userName: username
        });
-       const { message, } = data;
+       const { message } = data;
        if (data.code === 200 || Number(data.code) === 200) {
         handleSuccess(data.data)
        } else {

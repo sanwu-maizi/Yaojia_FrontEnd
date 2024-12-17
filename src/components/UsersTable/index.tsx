@@ -7,17 +7,31 @@ import { message } from "antd";
 
 function UsersTable() {
   const [messageApi, contextHolder] = message.useMessage();
+  const [tableParams, setTableParams] = useState({
+    pagination: {
+      current: 1,
+      pageSize: 10,
+      total: 1000,
+    },
+  });
   const [data, setData] = useState<User[]>([]);
 
   useEffect(()=> {
     getUsers();
   }, []);
 
+  useEffect(()=>{
+    getUsers();
+  }, [
+    tableParams.pagination?.current,
+    tableParams.pagination?.pageSize,
+  ]);
+
   const getUsers = async () => {
     try {
       const { data } = await getUserList({
-        size: 10,
-        offset: 1,
+        size: tableParams.pagination?.pageSize,
+        offset: tableParams.pagination?.current,
         token: getToken() || "",
        });
       const { code, message } = data;
@@ -28,6 +42,16 @@ function UsersTable() {
       }
     } catch {
       messageApi.error("Error: " + message);
+    }
+  };
+
+
+  const handleTableChange = (pagination: any) => {
+    setTableParams({
+      pagination,
+    });
+    if (pagination.pageSize !== tableParams.pagination?.pageSize) {
+      setData([]);
     }
   };
   
@@ -61,7 +85,7 @@ function UsersTable() {
   return (
     <>
       { contextHolder }
-      <BasicTable dataSource={data} columns={columns}></BasicTable>
+      <BasicTable dataSource={data} columns={columns} pagination={tableParams.pagination} onChange={handleTableChange}></BasicTable>
     </>
   );
 }

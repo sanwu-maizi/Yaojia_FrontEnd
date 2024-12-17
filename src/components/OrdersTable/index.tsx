@@ -7,17 +7,31 @@ import { message } from "antd";
 
 function OrdersTable() {
   const [data, setData] = useState<Order[]>([]);
+  const [tableParams, setTableParams] = useState({
+    pagination: {
+      current: 1,
+      pageSize: 10,
+      total: 1000,
+    },
+  });
   const [messageApi, contextHolder] = message.useMessage();
 
   useEffect(()=> {
     getOrders();
   }, []);
 
+  useEffect(()=>{
+    getOrders();
+  }, [
+    tableParams.pagination?.current,
+    tableParams.pagination?.pageSize,
+  ]);
+
   const getOrders = async () => {
     try {
       const { data } = await getOrderList({
-        size: 10,
-        offset: 1,
+        size: tableParams.pagination?.pageSize,
+        offset: tableParams.pagination?.current,
         token: getToken() || "",
        });
       const { code, message } = data;
@@ -30,6 +44,16 @@ function OrdersTable() {
       messageApi.error("获取异常");
     }
   };
+
+  const handleTableChange = (pagination: any) => {
+    setTableParams({
+      pagination,
+    });
+    if (pagination.pageSize !== tableParams.pagination?.pageSize) {
+      setData([]);
+    }
+  };
+
   
   const columns = [
     {
@@ -61,7 +85,7 @@ function OrdersTable() {
   return (
     <>
       { contextHolder }
-      <BasicTable dataSource={data} columns={columns}></BasicTable>
+      <BasicTable dataSource={data} columns={columns} pagination={tableParams.pagination} onChange={handleTableChange}></BasicTable>
     </>
   );
 }

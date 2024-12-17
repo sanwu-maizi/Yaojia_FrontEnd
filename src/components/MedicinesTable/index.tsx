@@ -7,17 +7,31 @@ import { message } from "antd";
 
 function MedicinesTable() {
   const [data, setData] = useState<Medicine[]>([]);
+  const [tableParams, setTableParams] = useState({
+    pagination: {
+      current: 1,
+      pageSize: 10,
+      total: 1000,
+    },
+  });
   const [messageApi, contextHolder] = message.useMessage();
 
   useEffect(()=> {
     getMedicines();
   }, []);
 
+  useEffect(()=>{
+    getMedicines();
+  }, [
+    tableParams.pagination?.current,
+    tableParams.pagination?.pageSize,
+  ]);
+
   const getMedicines = async () => {
     try {
       const { data } = await getMedicineList({
-        size: 10,
-        offset: 1,
+        size: tableParams.pagination?.pageSize,
+        offset: tableParams.pagination?.current,
         token: getToken() || "",
        });
       const { code, message } = data;
@@ -28,6 +42,15 @@ function MedicinesTable() {
       }
     } catch {
       messageApi.error("Error: " + message);
+    }
+  };
+
+  const handleTableChange = (pagination: any) => {
+    setTableParams({
+      pagination,
+    });
+    if (pagination.pageSize !== tableParams.pagination?.pageSize) {
+      setData([]);
     }
   };
 
@@ -66,7 +89,7 @@ function MedicinesTable() {
   return (
     <>
       { contextHolder }
-      <BasicTable dataSource={data} columns={columns}></BasicTable>
+      <BasicTable dataSource={data} columns={columns} pagination={tableParams.pagination} onChange={handleTableChange}></BasicTable>
     </>
   );
 }

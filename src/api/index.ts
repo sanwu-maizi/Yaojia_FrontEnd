@@ -32,7 +32,7 @@ export function getVerificationCode(params: FetchCode) {
 
 
 export function register(params: FetchRegisterParams) {
-  return service.post("/user/register", { params: params });
+  return service.post("/user/register", params);
 }
 
 export function login(params: FetchLoginParams){

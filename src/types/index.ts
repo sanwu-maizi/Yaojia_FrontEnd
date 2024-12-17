@@ -62,7 +62,6 @@ export interface FetchRegisterParams {
   userEmail: string;
   userPassword: string;
   userName: string;
-  code: string;
 }
 
 export interface BasicalResponse<T> {
